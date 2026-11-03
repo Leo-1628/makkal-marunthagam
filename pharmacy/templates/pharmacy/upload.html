@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Medicines - Makkal Marunthagam</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial; background: #f0f7ff; padding: 30px; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        h2 { color: #0d6efd; text-align: center; }
+        input[type=file] { padding: 15px; border: 2px dashed #0d6efd; width: 92%; border-radius: 8px; margin: 15px 0; background: #f8fbff; }
+        button { padding: 12px 25px; background: #198754; color: white; border: none; border-radius: 8px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold; }
+        button:hover { background: #157347; }
+        a { display: block; text-align: center; margin-top: 15px; color: #0d6efd; text-decoration: none; font-weight: bold; }
+        .msg { padding: 12px; border-radius: 8px; margin-bottom: 15px; text-align: center; }
+        .success { background: #d1e7dd; color: #0f5132; border: 1px solid #a3cfbb; }
+        .error { background: #f8d7da; color: #842029; border: 1px solid #f5c2c7; }
+        .sample { background: #f8f9fa; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 13px; color: #555; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📤 Upload Medicine CSV</h2>
+        <p style="text-align:center; color:#555;">Upload your full stock list at once</p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="msg {% if message.tags == 'success' %}success{% else %}error{% endif %}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="file" accept=".csv" required>
+            <button type="submit">Upload Medicines</button>
+        </form>
+
+        <a href="/">← Back to Dashboard</a>
+        
+        <div class="sample">
+            <b>Sample CSV Format (

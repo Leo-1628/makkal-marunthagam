@@ -1,0 +1,28 @@
+Makkal Marunthagam - Render FREE Deploy Steps
+
+1. In your VS Code, copy these files into makkal_medical folder:
+   - requirements.txt
+   - render.yaml
+   - Procfile
+
+2. Update config/settings.py with snippet in RENDER_SETTINGS_SNIPPET.py
+
+3. Push to GitHub:
+   git init
+   git add .
+   git commit -m "Makkal Marunthagam ready for Render"
+   git branch -M main
+   git remote add origin https://github.com/YOURUSERNAME/makkal-marunthagam.git
+   git push -u origin main
+
+4. Go to render.com -> Sign Up FREE with GitHub (NO CARD)
+   -> New + -> Web Service
+   -> Select your repo makkal-marunthagam
+   -> Build: pip install -r requirements.txt
+   -> Start: gunicorn config.wsgi:application
+   -> Click Create
+
+5. Wait 2-3 mins, your link:
+   https://makkal-marunthagam.onrender.com
+
+6. Open that link on your PHONE - search Brilinta 90 mg -> Ticagrelor PMBI

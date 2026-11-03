@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Makkal Marunthagam</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial; background: #f0f7ff; margin: 0; padding: 30px; }
+        .container { max-width: 1100px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        h2 { color: #0d6efd; text-align: center; margin-bottom: 5px; }
+        .sub { text-align:center; color: #555; margin-bottom: 10px; }
+        .stats { text-align:center; color: #198754; font-weight: bold; background: #d1e7dd; padding: 8px; border-radius: 8px; margin-bottom: 15px; }
+        .search-box { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
+        input { padding: 12px; width: 450px; border: 2px solid #0d6efd; border-radius: 8px; font-size: 16px; outline: none; }
+        button { padding: 12px 25px; background: #0d6efd; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #0b5ed7; }
+        .pmbi-banner { background: #d4edda; border: 2px solid #198754; padding: 12px 15px; border-radius: 8px; margin-top: 20px; color: #0f5132; }
+        .pmbi-banner b { color: #0f5132; }
+        .brand-tag { background: #ffc107; color: #000; padding: 3px 8px; border-radius: 5px; font-size: 12px; font-weight: bold; }
+        .pmbi-tag { background: #198754; color: white; padding: 3px 8px; border-radius: 5px; font-size: 12px; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { background: #0d6efd; color: white; padding: 12px; text-align: left; }
+        td { padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px; }
+        tr:hover { background: #eef5ff; }
+        .drug-code { color: #198754; font-weight: bold; background: #d1e7dd; padding: 4px 8px; border-radius: 5px; white-space: nowrap; }
+        .no-result { text-align: center; color: red; margin-top: 20px; background: #f8d7da; padding: 15px; border-radius: 8px; }
+        .manufacturer { color: #6c757d; font-size: 12px; background: #f8f9fa; padding: 3px 6px; border-radius: 4px; }
+        .savings { color: #dc3545; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Makkal Marunthagam - Medicine Search</h2>
+        <p class="sub">Search by Brand Name / Combination / Drug Code | Type Brilinta → Get PMBI Ticagrelor</p>
+        
+        {% if total_count %}
+        <div class="stats">📦 Total Medicines in Stock: {{ total_count }} | 💊 PMBI + Brand Mapping Active</div>
+        {% endif %}
+
+        <form method="GET" class="search-box">
+            <input type="text" name="q" value="{{ query }}" placeholder="e.g. Brilinta 90 mg, Rosevas 5, Thyronorm" autofocus>
+            <button type="submit">Search</button>
+        </form>
+
+        {% if pmbi_suggestion %}
+        <div class="pmbi-banner">
+            <b>💰 PMBI Alternative Found!</b><br>
+            You searched: <span class="brand-tag">{{ query }}</span> → Same salt: <b>{{ pmbi_suggestion|title }}</b> <br>
+            <span style="font-size:13px;">Showing cheaper PMBI products with same combination as {{ query }} — <span class="savings">SAVE up to 70%</span></span>
+        </div>
+        {% endif %}
+
+        {% if results %}
+        <table>
+            <tr>
+                <th>Brand / Generic Name</th>
+                <th>Combination / Composition</th>
+                <th>Drug Code</th>
+                <th>Category</th>
+            </tr>
+            {% for med in results %}
+            <tr>
+                <td>
+                    <b>{{ med.brand_name }}</b><br>
+                    {% if 'BRAND->PMBI' in med.manufacturer %}
+                        <span class="brand-tag">BRAND → PMBI</span>
+                    {% elif 'PMBI' in med.drug_code %}
+                        <span class="pmbi-tag">PMBI</span>
+                    {% else %}
+                        <span class="brand-tag">BRAND</span>
+                    {% endif %}
+                </td>
+                <td>{{ med.combination }}</td>
+                <td><span class="drug-code">{{ med.drug_code }}</span></td>
+                <td><span class="manufacturer">{{ med.manufacturer }}</span></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <p style="text-align:center; color:#6c757d; margin-top:15px; font-size:13px;">Showing {{ results|length }} results for "{{ query }}"</p>
+        {% elif query %}
+        <div class="no-result">
+            <b>No medicine found for "{{ query }}"</b><br>
+            <span style="font-size:14px;">Try searching salt name: Ticagrelor for Brilinta, Rosuvastatin for Rosevas, Telmisartan for Telma</span>
+        </div>
+        {% else %}
+        <p style="text-align:center; color:#888; margin-top:30px;">🔍 Try: <b>Brilinta 90 mg</b> | <b>Rosevas 10</b> | <b>Telma H</b> | <b>Thyronorm 75</b> | <b>Atorva 20</b></p>
+        {% endif %}
+    </div>
+</body>
+</html>
