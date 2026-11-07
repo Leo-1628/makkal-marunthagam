@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Makkal Marunthagam | PMBI Pharmacy - Pudupakkam</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Noto+Sans+Tamil:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef3ff;color:#111;overflow-x:hidden}
+/* ===== ANIMATED BACKGROUND ===== */
+.bg{position:fixed;inset:0;z-index:-1;background:linear-gradient(135deg,#0f3d8a 0%,#1a6cff 35%,#00c6a7 70%,#eef3ff 100%);background-size:300% 300%;animation:grad 12s ease infinite}
+@keyframes grad{0%{background-position:0% 0%}50%{background-position:100% 100%}100%{background-position:0% 0%}}
+.bg:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.35),transparent 40%),radial-gradient(circle at 80% 80%,rgba(255,215,0,.35),transparent 40%)}
+.float-pill{position:fixed;font-size:42px;opacity:.25;z-index:-1;animation:float 6s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-10deg)}50%{transform:translateY(-22px) rotate(10deg)}}
+/* ===== TOP BAR ===== */
+.top{position:sticky;top:0;z-index:100;backdrop-filter:blur(16px);background:rgba(255,255,255,.92);box-shadow:0 4px 24px rgba(0,0,0,.08);display:flex;justify-content:space-between;align-items:center;padding:12px 22px}
+.logo{font-weight:900;font-size:22px;line-height:1;color:#0f3d8a}
+.logo span{color:#00a651}
+.logo small{display:block;font-size:10px;letter-spacing:2px;color:#666;font-weight:700}
+.top a{background:linear-gradient(90deg,#ff6f00,#ff9a00);color:#fff;text-decoration:none;padding:12px 20px;border-radius:999px;font-weight:800;font-size:14px;box-shadow:0 8px 20px rgba(255,111,0,.35)}
+.top a:hover{transform:translateY(-2px)}
+/* ===== HERO ===== */
+.wrap{max-width:1150px;margin:auto;padding:18px}
+.hero{position:relative;border-radius:28px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.hero img{width:100%;height:360px;object-fit:cover;display:block}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 55%);display:flex;align-items:flex-end;padding:22px}
+.hero-overlay div{color:#fff}
+.hero-overlay h1{font-size:36px;line-height:1.05;font-weight:900}
+.hero-overlay h1 span{color:#ffd814}
+.hero-overlay p{margin-top:8px;opacity:.95;font-size:15px}
+.live{position:absolute;top:16px;left:16px;background:#fff;color:#111;padding:8px 14px;border-radius:999px;font-weight:800;font-size:13px;display:flex;gap:6px;align-items:center}
+.dot{width:10px;height:10px;background:#22c55e;border-radius:50%;animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.3}}
+.rating{position:absolute;top:16px;right:16px;background:#111;color:#fff;padding:8px 14px;border-radius:999px;font-weight:800;font-size:13px}
+/* ===== SEARCH GLASS ===== */
+.search-glass{margin-top:-38px;position:relative;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);border-radius:24px;padding:24px;box-shadow:0 16px 40px rgba(0,0,0,.15);text-align:center}
+.search-glass h2{font-size:26px}
+.search-glass p{color:#555;margin:8px 0 14px}
+.search-glass form{display:flex;gap:10px;max-width:720px;margin:auto;background:#f1f3f6;padding:6px;border-radius:999px;border:2px solid #0f3d8a}
+.search-glass input{flex:1;border:none;outline:none;background:transparent;padding:14px 18px;font-size:16px}
+.search-glass button{background:#0f3d8a;color:#fff;border:none;padding:14px 28px;border-radius:999px;font-weight:800;font-size:16px;cursor:pointer}
+.chips{margin-top:14px}
+.chips a{display:inline-block;background:#fff;border:1px solid #e2e8f0;padding:8px 14px;border-radius:999px;text-decoration:none;color:#0f3d8a;font-weight:700;font-size:13px;margin:4px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.chips a:hover{background:#0f3d8a;color:#fff}
+/* ===== STATS ===== */
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;margin-top:18px}
+.stat{background:#fff;border-radius:20px;padding:18px;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,.06)}
+.stat b{font-size:26px;display:block}
+.stat span{font-size:13px;color:#666}
+/* ===== CARDS ===== */
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:18px}
+.card{background:#fff;border-radius:24px;padding:24px;text-align:center;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.07);transition:.3s}
+.card:hover{transform:translateY(-6px);box-shadow:0 16px 36px rgba(0,0,0,.12)}
+.card:nth-child(1){background:linear-gradient(135deg,#fff7ed,#fff);border:1px solid #ffedd5}
+.card:nth-child(2){background:linear-gradient(135deg,#f0fdf4,#fff);border:1px solid #dcfce7}
+.card:nth-child(3){background:linear-gradient(135deg,#eff6ff,#fff);border:1px solid #dbeafe}
+.card .icon{font-size:38px}
+.card h3{margin:10px 0 6px;font-size:19px}
+.card p{color:#555;font-size:14px;line-height:1.6}
+.card .big{font-size:22px;font-weight:900;color:#0f3d8a}
+/* ===== SHOP ===== */
+.section-title{font-size:24px;font-weight:900;margin:28px 0 14px;color:#111;display:flex;align-items:center;gap:10px}
+.section-title span{background:#ffd814;padding:4px 12px;border-radius:999px;font-size:14px}
+.gallery{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.g-item{border-radius:22px;overflow:hidden;position:relative;box-shadow:0 10px 28px rgba(0,0,0,.15);height:220px}
+.g-item img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.g-item:hover img{transform:scale(1.08)}
+.g-item label{position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,.65);color:#fff;padding:7px 12px;border-radius:999px;font-size:12px;font-weight:700}
+/* ===== ABOUT ===== */
+.about{background:#0f1e3a;color:#fff;border-radius:28px;padding:28px;margin-top:22px;display:grid;grid-template-columns:1.2fr .8fr;gap:20px;position:relative;overflow:hidden}
+.about:before{content:'💊';position:absolute;right:-20px;top:-20px;font-size:120px;opacity:.12}
+.about h2{font-size:26px;margin-bottom:12px}
+.about h2 span{color:#ffd814}
+.about p{line-height:1.7;color:#cbd5e1;font-size:14.5px}
+.about ul{margin:14px 0;list-style:none}
+.about li{padding:6px 0}
+.about .right{background:rgba(255,255,255,.08);border-radius:20px;padding:20px}
+.wa{display:block;text-align:center;background:#25D366;color:#fff;padding:15px;border-radius:999px;text-decoration:none;font-weight:900;margin-top:12px}
+.go{display:block;text-align:center;background:#fff;color:#0f3d8a;padding:15px;border-radius:999px;text-decoration:none;font-weight:900;margin-top:10px}
+.footer{text-align:center;color:#fff;padding:22px;font-size:13px;line-height:1.6}
+.footer b{color:#ffd814}
+/* ===== MOBILE VERTICAL - PHONE PERFECT ===== */
+@media(max-width:640px){
+  .top{padding:10px 14px}
+  .logo{font-size:18px}
+  .top a{padding:9px 14px;font-size:12px}
+  .wrap{padding:12px}
+  .hero img{height:190px}
+  .hero-overlay{padding:14px}
+  .hero-overlay h1{font-size:22px!important;line-height:1.2}
+  .hero-overlay p{font-size:13px}
+  .search-glass{padding:18px 14px;margin-top:-22px}
+  .search-glass h2{font-size:20px}
+  .search-glass form{flex-direction:column;border-radius:16px;padding:6px}
+  .search-glass input{padding:12px;text-align:center}
+  .search-glass button{width:100%;padding:13px}
+  .stats{grid-template-columns:1fr 1fr;gap:10px}
+  .stat{padding:14px 8px}
+  .stat b{font-size:20px}
+  .cards,.gallery,.about{grid-template-columns:1fr!important}
+  .g-item{height:200px}
+  .live{font-size:11px;padding:6px 10px}
+  .rating{font-size:11px;padding:6px 10px}
+}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="float-pill" style="top:15%;left:4%">💊</div>
+<div class="float-pill" style="top:60%;left:2%;animation-delay:1s">💉</div>
+<div class="float-pill" style="top:20%;right:4%;animation-delay:2s">🩺</div>
+<div class="float-pill" style="top:75%;right:6%;animation-delay:.5s">💊</div>
+
+<div class="top">
+  <div class="logo">MAKKAL <span>MARUNTHAGAM</span><small>PMBI • PUDUPAKKAM • JAN AUSHADHI</small></div>
+  <a href="/search/">🔍 SEARCH MEDICINE →</a>
+</div>
+
+<div class="wrap">
+  <!-- HERO -->
+  <div class="hero">
+    <img src="{% static 'pharmacy/shop-banner-ai.jpg' %}">
+    <div class="live"><span class="dot"></span> OPEN NOW • Pudupakkam</div>
+    <div class="rating">⭐ 4.8 • 33 Reviews</div>
+    <div class="hero-overlay"><div>
+      <h1>மக்கள் மருந்தகம்<br><span>Same Salt. Low Price.</span></h1>
+      <p>Doctor எழுதிய Brand-ஐ கொடுங்கள் — PMBI-யில் அதே மருந்து 30% to 70% குறைவில்!</p>
+    </div></div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-glass">
+    <h2>🔍 Brand Medicine-ஐ தேடுங்கள்</h2>
+    <p>Brand பெயரை type செய்யுங்கள் — PMBI Drug Code + Savings உடனே கிடைக்கும்</p>
+    <form method="get" action="/search/"><input type="text" name="q" placeholder="Ex: Dolo 650, Brilinta 90, Rosevas 5..." autofocus><button>Search →</button></form>
+    <div class="chips">
+      <a href="/search/?q=Dolo+650">🔥 Dolo 650</a>
+      <a href="/search/?q=Brilinta+90">❤️ Brilinta 90</a>
+      <a href="/search/?q=Rosevas+5">Rosevas 5</a>
+      <a href="/search/?q=Telma+40">Telma 40</a>
+      <a href="/search/?q=Glycomet+500">Glycomet 500</a>
+      <a href="/search/?q=Pan+40">Pan 40</a>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><b>{{ total_count }}+</b><span>Medicines in Stock</span></div>
+    <div class="stat"><b style="color:#00a651">70% OFF</b><span>Up to Savings</span></div>
+    <div class="stat"><b>⭐ 4.8</b><span>Google Rating</span></div>
+    <div class="stat"><b>🚚 Free</b><span>Home Delivery</span></div>
+  </div>
+
+  <!-- 3 CARDS -->
+  <div class="cards">
+    <div class="card"><div class="icon">💰</div><h3>30% to 70% OFF</h3><p>PMBI Generic - Same Salt, Same Effect.<br><b>30% முதல் 70% வரை விலை குறைவு</b></p><div style="margin-top:12px;background:#ff6f00;color:#fff;padding:8px;border-radius:999px;font-weight:800;font-size:13px">SAVE YOUR MONEY 💸</div></div>
+    <div class="card"><div class="icon">🛡️</div><h3>100% Genuine • Govt.</h3><p>Trusted by Pudupakkam customers.<br>Pradhan Mantri Bhartiya Jan Aushadhi Kendra</p><div style="margin-top:12px;background:#00a651;color:#fff;padding:8px;border-radius:999px;font-weight:800;font-size:13px">✅ GOVT. INITIATIVE</div></div>
+    <div class="card"><div class="icon">📞</div><h3>Order in 1 Min</h3><p class="big">63820 53489</p><p>Free Delivery • Open 7 Days<br>8 AM - 10 PM • Pudupakkam</p><div style="margin-top:12px;background:#0f3d8a;color:#fff;padding:8px;border-radius:999px;font-weight:800;font-size:13px">📍 CHENNAI - 603103</div></div>
+  </div>
+
+  <!-- SHOP -->
+  <div class="section-title">🏪 Our Shop <span>Live Photos</span></div>
+  <div class="gallery">
+    <div class="g-item"><img src="{% static 'pharmacy/shop-board.jpg' %}"><label>📍 Main Board • Pudupakkam</label></div>
+    <div class="g-item"><img src="{% static 'pharmacy/shop-standee.jpg' %}"><label>🏛️ Jan Aushadhi Kendra</label></div>
+    <div class="g-item"><img src="{% static 'pharmacy/shop-shelf.jpg' %}"><label>💊 PMBI Shelf • Drug Codes</label></div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="about">
+    <div>
+      <h2>About — <span>PMBI Jan Aushadhi</span></h2>
+      <p><b style="color:#fff">Pradhan Mantri Bhartiya Jan Aushadhi Kendra</b> — Govt. of India initiative. Quality generic medicines at 50% to 90% lower price. Same salt, same quality, same effect.</p>
+      <ul>
+        <li>✅ Same Salt — Doctor சொன்ன அதே மருந்து</li>
+        <li>✅ Same Quality — Govt. tested, GMP certified</li>
+        <li>✅ Low Price — Brand-ஐ விட 70% வரை குறைவு</li>
+      </ul>
+      <p><b style="color:#fff">Address:</b> 1/132 B, Kavarai Street, Pudupakkam Main Rd, Pudupakkam, Tamil Nadu 603103<br><b style="color:#fff">Email:</b> makkalmarunthagampudupakkam@gmail.com</p>
+    </div>
+    <div class="right">
+      <h3 style="margin-bottom:8px">⚡ Quick Order</h3>
+      <p style="font-size:14px;color:#cbd5e1">Prescription photo-வை WhatsApp-இல் அனுப்புங்கள். நாங்கள் PMBI விலையுடன் reply செய்கிறோம்.</p>
+      <a class="wa" href="https://wa.me/916382053489?text=Hi%20Makkal%20Marunthagam%2C%20I%20want%20to%20order%20medicine">💬 WhatsApp Order — 63820 53489</a>
+      <a class="go" href="/search/">🔍 Go to Medicine Search →</a>
+      <p style="text-align:center;margin-top:12px;font-size:12px;color:#94a3b8">Open 7 Days • 8 AM - 10 PM • Free Delivery</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer"><b>MAKKAL MARUNTHAGAM</b> • Pudupakkam, Chennai - 603103 • PMBI • Jan Aushadhi • Govt. of India<br>30% to 70% OFF • Free Delivery • 63820 53489</div>
+</body>
+</html>

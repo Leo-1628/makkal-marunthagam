@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Makkal Marunthagam | Search Medicine - Pudupakkam</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef3ff;color:#111;overflow-x:hidden}
+/* ===== BG ===== */
+.bg{position:fixed;inset:0;z-index:-1;background:linear-gradient(135deg,#0f3d8a 0%,#1a6cff 35%,#00c6a7 70%,#eef3ff 100%);background-size:300% 300%;animation:grad 12s ease infinite}
+@keyframes grad{0%{background-position:0% 0%}50%{background-position:100% 100%}100%{background-position:0% 0%}}
+.float-pill{position:fixed;font-size:38px;opacity:.22;z-index:-1;animation:float 6s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-10deg)}50%{transform:translateY(-20px) rotate(10deg)}}
+/* ===== HEADER ===== */
+.header{position:sticky;top:0;z-index:100;backdrop-filter:blur(16px);background:rgba(255,255,255,.95);box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.header-top{background:#0f3d8a;color:#fff;font-size:12px;padding:7px 20px;display:flex;justify-content:space-between}
+.header-top b{color:#ffd814}
+.header-main{max-width:1200px;margin:auto;display:flex;align-items:center;gap:16px;padding:12px 20px}
+.logo{font-size:24px;font-weight:900;color:#0f3d8a;line-height:1;white-space:nowrap;text-decoration:none}
+.logo span{color:#00a651}
+.logo small{display:block;font-size:10px;color:#666;letter-spacing:1px;font-weight:700}
+.search-main{flex:1;display:flex;background:#f1f3f6;border:2px solid #0f3d8a;border-radius:999px;overflow:hidden;padding:3px}
+.search-main input{flex:1;border:none;outline:none;padding:12px 16px;font-size:16px;background:transparent}
+.search-main button{background:linear-gradient(90deg,#ff6f00,#ff9a00);color:#fff;border:none;padding:0 26px;border-radius:999px;font-weight:800;cursor:pointer}
+.home-btn{background:#0f3d8a;color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:800;font-size:14px;white-space:nowrap}
+.nav{border-top:1px solid #eee;background:#fff}
+.nav-inner{max-width:1200px;margin:auto;display:flex;gap:20px;padding:10px 20px;font-size:13px;font-weight:700;overflow-x:auto;white-space:nowrap}
+.nav-inner a{color:#333;text-decoration:none}
+.nav-inner a.active{color:#0f3d8a;border-bottom:2px solid #ff6f00}
+.container{max-width:1200px;margin:0 auto;padding:0 20px 20px}
+.asked{background:rgba(255,255,255,.96);border-radius:20px;padding:18px;margin-top:18px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.badge{background:#e6f4ea;color:#137333;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:800}
+/* ===== COMPARE ===== */
+.compare{display:grid;grid-template-columns:1fr 60px 1fr;gap:0;margin-top:18px;align-items:stretch}
+.card{background:#fff;border-radius:24px;padding:26px;box-shadow:0 12px 36px rgba(0,0,0,.12);border:3px solid #eee;transition:.3s}
+.card:hover{transform:translateY(-4px)}
+.card.brand{border-color:#ff6f00}
+.card.pmbi{border-color:#00a651;background:linear-gradient(180deg,#f0fff4,#fff)}
+.card .tag{font-size:12px;font-weight:800;letter-spacing:1px;padding:7px 13px;border-radius:999px;display:inline-block}
+.card.brand .tag{background:#fff3e0;color:#e65100}
+.card.pmbi .tag{background:#00a651;color:#fff;box-shadow:0 4px 12px rgba(0,166,81,.35)}
+.card h2{font-size:28px;margin:12px 0 6px}
+.card .combo{color:#555;line-height:1.6;font-size:14px;min-height:66px}
+.detail{margin-top:14px}
+.detail div{display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid #eee;font-size:14px}
+.detail div b{text-align:right}
+.code-box{border-radius:16px;padding:16px;text-align:center;margin-top:14px}
+.card.brand .code-box{background:#111;color:#fff}
+.card.pmbi .code-box{background:linear-gradient(135deg,#0f3d8a,#1a6cff);color:#fff;box-shadow:0 8px 20px rgba(15,61,138,.35)}
+.code-box small{font-size:11px;letter-spacing:1px;opacity:.9}
+.code-box div{font-size:30px;font-weight:900;letter-spacing:1px}
+.vs{display:flex;align-items:center;justify-content:center}
+.vs span{background:#111;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;box-shadow:0 8px 20px rgba(0,0,0,.3);border:3px solid #ffd814}
+.save-bar{background:linear-gradient(90deg,#e6f4ea,#fff);color:#137333;border:2px solid #bbf7d0;border-radius:16px;padding:16px;text-align:center;font-weight:800;font-size:17px;margin-top:16px}
+.btns{display:flex;gap:12px;margin-top:14px}
+.btns button{flex:1;padding:14px;border:none;border-radius:999px;font-weight:800;cursor:pointer;font-size:15px}
+.btn-print{background:#111;color:#fff}
+.btn-clear{background:#fff;border:2px solid #eee}
+.alt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.alt-card{background:#fff;border-radius:18px;padding:18px;border:1px solid #eee;box-shadow:0 4px 14px rgba(0,0,0,.05)}
+.empty{background:rgba(255,255,255,.96);border-radius:24px;padding:36px;text-align:center;margin-top:18px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.empty h2{font-size:24px}
+.empty .try a{display:inline-block;background:#eef4ff;color:#0f3d8a;padding:8px 14px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px;margin:4px}
+.banner{margin-top:18px;border-radius:24px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.banner img{width:100%;height:180px;object-fit:cover;display:block}
+.footer{background:#0f1e3a;color:#cbd5e1;padding:20px;text-align:center;font-size:13px;margin-top:24px;line-height:1.6}
+@media(max-width:900px){.header-main{flex-wrap:wrap}.search-main{order:3;width:100%}.compare{grid-template-columns:1fr}.vs{padding:12px 0}.alt-grid{grid-template-columns:1fr}.header-top{flex-direction:column;gap:4px;text-align:center}}
+/* ===== MOBILE VERTICAL - PHONE PERFECT ===== */
+@media(max-width:640px){
+  .header-top{font-size:11px;padding:6px 12px}
+  .header-main{padding:10px 14px;gap:10px}
+  .logo{font-size:19px;width:100%;text-align:center;white-space:normal}
+  .search-main{order:3;width:100%}
+  .search-main input{font-size:14px;padding:10px}
+  .search-main button{padding:0 16px;font-size:13px}
+  .home-btn{padding:9px 14px;font-size:12px}
+  .nav-inner{gap:14px;padding:8px 14px}
+  .container{padding:0 12px 16px}
+  .asked{flex-direction:column;gap:10px;text-align:center}
+  .compare{grid-template-columns:1fr!important}
+  .vs{padding:10px 0}
+  .vs span{width:46px;height:46px;font-size:16px}
+  .card{padding:18px 16px}
+  .card h2{font-size:22px}
+  .code-box div{font-size:24px}
+  .detail div{font-size:13px}
+  .btns{flex-direction:column}
+  .alt-grid{grid-template-columns:1fr!important}
+  .banner img{height:130px}
+  .empty{padding:24px 16px}
+}
+@media print{.header,.nav,.btns,.footer,.banner{display:none!important}.compare{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="float-pill" style="top:15%;left:3%">💊</div>
+<div class="float-pill" style="top:65%;left:2%;animation-delay:1s">💉</div>
+<div class="float-pill" style="top:20%;right:3%;animation-delay:2s">🩺</div>
+<div class="float-pill" style="top:80%;right:5%;animation-delay:.5s">💊</div>
+
+<div class="header">
+  <div class="header-top"><div>📍 Deliver to <b>Pudupakkam, Chennai</b> • Free Delivery on PMBI Orders</div><div>🏛 Govt. of India • PMBI • Jan Aushadhi</div></div>
+  <div class="header-main">
+    <a href="/" class="logo">MAKKAL<span> MARUNTHAGAM</span><small>PMBI PHARMACY • PUDUPAKKAM</small></a>
+    <form method="get" action="/search/" class="search-main"><input type="text" name="q" value="{{ query }}" placeholder="Search... Dolo 650, Brilinta 90" autofocus><button type="submit">Search</button></form>
+    <a href="/" class="home-btn">🏠 HOME</a>
+  </div>
+  <div class="nav"><div class="nav-inner"><a href="/">Home</a><a href="/search/" class="active">🔍 Search Medicine</a><a href="/search/?q=Dolo+650">Fever & Pain</a><a href="/search/?q=Telma+40">Blood Pressure</a><a href="/search/?q=Glycomet+500">Diabetes</a><a href="/search/?q=Brilinta+90">Heart Care</a><a href="/search/?q=Thyronorm+50">Thyroid</a><a href="/search/?q=Pan+40">Acidity</a><a href="https://wa.me/916382053489" style="color:#00a651">💬 WhatsApp Order</a></div></div>
+</div>
+
+<div class="container">
+  {% if query and best_match %}
+    <div class="asked"><div><small>YOU ASKED FOR / நீங்கள் கேட்டது</small><br><b style="font-size:20px">{{ query|title }}</b><br><small>{{ savings_info }}</small></div><span class="badge">Same Salt: {{ pmbi_suggestion|title }}</span></div>
+
+    <div class="compare">
+      <div class="card brand">
+        <span class="tag">💊 BRAND TABLET — Customer Asked</span>
+        {% if brand_match %}
+          <h2>{{ brand_match.brand_name }}</h2>
+          <p class="combo">{{ brand_match.combination }}</p>
+          <div class="code-box"><small>BRAND DRUG CODE</small><div>{{ brand_match.drug_code }}</div><small>Brand Code • Costly</small></div>
+          <div class="detail">
+            <div><span>Medicine</span><b>{{ brand_match.brand_name }}</b></div>
+            <div><span>Combination</span><b style="font-size:13px">{{ brand_match.combination|truncatechars:60 }}</b></div>
+            <div><span>Manufacturer</span><b>{{ brand_match.manufacturer }}</b></div>
+            <div><span>Type</span><b>Branded • High Price</b></div>
+          </div>
+        {% else %}
+          <h2>{{ query|title }}</h2>
+          <p class="combo">Brand medicine as written by doctor.<br>PMBI alternative on right side has same salt.</p>
+          <div class="code-box"><small>BRAND</small><div>BRAND</div></div>
+          <div class="detail"><div><span>Note</span><b>Brand entry not in DB</b></div></div>
+        {% endif %}
+      </div>
+
+      <div class="vs"><span>VS</span></div>
+
+      <div class="card pmbi">
+        <span class="tag">✅ PMBI ALTERNATIVE — GIVE THIS • இதை கொடுங்கள்</span>
+        <h2>{{ best_match.brand_name }}</h2>
+        <p class="combo">{{ best_match.combination }}</p>
+        <div class="code-box"><small>🏷 PMBI DRUG CODE — TAKE FROM PMBI SHELF</small><div>{{ best_match.drug_code }}</div><small>இந்த கோடை சொல்லி மருந்து வாங்கவும்</small></div>
+        <div class="detail">
+          <div><span>Medicine</span><b>{{ best_match.brand_name }}</b></div>
+          <div><span>Combination</span><b style="font-size:13px">{{ best_match.combination|truncatechars:60 }}</b></div>
+          <div><span>Manufacturer</span><b>{{ best_match.manufacturer }}</b></div>
+          <div><span>Type</span><b style="color:#00a651">PMBI Generic • 50-90% Cheaper</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="save-bar">💰 Brand Costly → PMBI Same Salt = Save Up to 70% • பணம் மிச்சம்! • அதே உப்பு, அதே தரம், அதே குணம்</div>
+    <div class="btns"><button class="btn-print" onclick="window.print()">🖨 Print Slip — Brand vs PMBI</button><button class="btn-clear" onclick="window.location.href='/search/'">Clear</button></div>
+
+    {% if alternatives %}
+    <h2 style="margin:22px 0 0;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.3)">Other PMBI Options</h2>
+    <div class="alt-grid">{% for m in alternatives %}<div class="alt-card"><b>{{ m.brand_name }}</b><br><small>{{ m.combination|truncatechars:110 }}</small><br><span style="background:#0f3d8a;color:#fff;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;display:inline-block;margin-top:8px">{{ m.drug_code }}</span></div>{% endfor %}</div>
+    {% endif %}
+
+  {% elif query %}
+    <div class="empty"><h2>😔 No PMBI alternative found for "{{ query }}"</h2><p style="margin:10px 0;color:#555">Try these trending medicines:</p><div class="try"><a href="/search/?q=Dolo+650">Dolo 650</a><a href="/search/?q=Brilinta+90">Brilinta 90</a><a href="/search/?q=Rosevas+5">Rosevas 5</a><a href="/search/?q=Telma+40">Telma 40</a></div></div>
+  {% else %}
+    <div class="banner"><img src="{% static 'pharmacy/shop-banner-ai.jpg' %}"></div>
+    <div class="empty"><h2>👋 வணக்கம்! Search above</h2><p style="color:#555;margin:10px 0">Doctor எழுதிய Brand-ஐ டைப் செய்யுங்கள் — Brand vs PMBI side-by-side கிடைக்கும்.</p><div class="try"><a href="/search/?q=Dolo+650">Dolo 650</a><a href="/search/?q=Brilinta+90">Brilinta 90</a><a href="/search/?q=Rosevas+5">Rosevas 5</a><a href="/search/?q=Telma+40">Telma 40</a></div></div>
+  {% endif %}
+</div>
+
+<div class="footer">MAKKAL MARUNTHAGAM • 1/132 B, Kavarai Street, Pudupakkam Main Rd, Pudupakkam, Chennai - 603103 • 📞 63820 53489 • PMBI • Jan Aushadhi • Govt. of India<br><a href="/" style="color:#ffd814">🏠 Back to Home</a></div>
+</body>
+</html>
