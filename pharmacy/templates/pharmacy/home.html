@@ -4,10 +4,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Makkal Marunthagam | PMBI Pharmacy - Pudupakkam</title>
+<!-- PWA - Install as App -->
+<link rel="manifest" href="{% static 'pharmacy/manifest.json' %}">
+<meta name="theme-color" content="#0f3d8a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Makkal Marunthagam">
+<link rel="apple-touch-icon" href="{% static 'pharmacy/icon-192.png' %}">
+<link rel="icon" type="image/png" href="{% static 'pharmacy/icon-192.png' %}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Noto+Sans+Tamil:wght@600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register("{% static 'pharmacy/sw.js' %}");
+}
+</script>
 body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef3ff;color:#111;overflow-x:hidden}
 /* ===== ANIMATED BACKGROUND ===== */
 .bg{position:fixed;inset:0;z-index:-1;background:linear-gradient(135deg,#0f3d8a 0%,#1a6cff 35%,#00c6a7 70%,#eef3ff 100%);background-size:300% 300%;animation:grad 12s ease infinite}
