@@ -22,21 +22,16 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef3ff;color:#111;ov
 .logo small{display:block;font-size:10px;letter-spacing:2px;color:#666;font-weight:700}
 .top a{background:linear-gradient(90deg,#ff6f00,#ff9a00);color:#fff;text-decoration:none;padding:12px 20px;border-radius:999px;font-weight:800;font-size:14px;box-shadow:0 8px 20px rgba(255,111,0,.35)}
 .top a:hover{transform:translateY(-2px)}
-/* ===== HERO ===== */
+/* ===== HERO - CLEAN, NO OVERLAY TEXT ===== */
 .wrap{max-width:1150px;margin:auto;padding:18px}
-.hero{position:relative;border-radius:28px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.25)}
-.hero img{width:100%;height:360px;object-fit:cover;display:block}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 55%);display:flex;align-items:flex-end;padding:22px}
-.hero-overlay div{color:#fff}
-.hero-overlay h1{font-size:36px;line-height:1.05;font-weight:900}
-.hero-overlay h1 span{color:#ffd814}
-.hero-overlay p{margin-top:8px;opacity:.95;font-size:15px}
-.live{position:absolute;top:16px;left:16px;background:#fff;color:#111;padding:8px 14px;border-radius:999px;font-weight:800;font-size:13px;display:flex;gap:6px;align-items:center}
+.hero{position:relative;border-radius:28px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.25);background:#fff}
+.hero img{width:100%;height:auto;display:block}
+.live{position:absolute;top:14px;left:14px;background:#fff;color:#111;padding:8px 14px;border-radius:999px;font-weight:800;font-size:13px;display:flex;gap:6px;align-items:center;box-shadow:0 4px 12px rgba(0,0,0,.2)}
 .dot{width:10px;height:10px;background:#22c55e;border-radius:50%;animation:blink 1.2s infinite}
 @keyframes blink{50%{opacity:.3}}
-.rating{position:absolute;top:16px;right:16px;background:#111;color:#fff;padding:8px 14px;border-radius:999px;font-weight:800;font-size:13px}
+.rating{position:absolute;top:14px;right:14px;background:#111;color:#fff;padding:8px 14px;border-radius:999px;font-weight:800;font-size:13px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
 /* ===== SEARCH GLASS ===== */
-.search-glass{margin-top:-38px;position:relative;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);border-radius:24px;padding:24px;box-shadow:0 16px 40px rgba(0,0,0,.15);text-align:center}
+.search-glass{margin-top:16px;position:relative;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);border-radius:24px;padding:24px;box-shadow:0 16px 40px rgba(0,0,0,.15);text-align:center}
 .search-glass h2{font-size:26px}
 .search-glass p{color:#555;margin:8px 0 14px}
 .search-glass form{display:flex;gap:10px;max-width:720px;margin:auto;background:#f1f3f6;padding:6px;border-radius:999px;border:2px solid #0f3d8a}
@@ -88,11 +83,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef3ff;color:#111;ov
   .logo{font-size:18px}
   .top a{padding:9px 14px;font-size:12px}
   .wrap{padding:12px}
-  .hero img{height:190px}
-  .hero-overlay{padding:14px}
-  .hero-overlay h1{font-size:22px!important;line-height:1.2}
-  .hero-overlay p{font-size:13px}
-  .search-glass{padding:18px 14px;margin-top:-22px}
+  .hero{border-radius:18px}
+  .hero img{height:auto;min-height:150px}
+  .search-glass{padding:18px 14px;margin-top:14px}
   .search-glass h2{font-size:20px}
   .search-glass form{flex-direction:column;border-radius:16px;padding:6px}
   .search-glass input{padding:12px;text-align:center}
@@ -102,8 +95,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef3ff;color:#111;ov
   .stat b{font-size:20px}
   .cards,.gallery,.about{grid-template-columns:1fr!important}
   .g-item{height:200px}
-  .live{font-size:11px;padding:6px 10px}
-  .rating{font-size:11px;padding:6px 10px}
+  .live{font-size:11px;padding:6px 10px;top:10px;left:10px}
+  .rating{font-size:11px;padding:6px 10px;top:10px;right:10px}
 }
 </style>
 </head>
@@ -120,15 +113,11 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef3ff;color:#111;ov
 </div>
 
 <div class="wrap">
-  <!-- HERO -->
+  <!-- HERO - CLEAN BANNER ONLY, NO OVERLAY TEXT -->
   <div class="hero">
-    <img src="{% static 'pharmacy/shop-banner-ai.jpg' %}">
+    <img src="{% static 'pharmacy/shop-banner-ai.jpg' %}" alt="Makkal Marunthagam Banner">
     <div class="live"><span class="dot"></span> OPEN NOW • Pudupakkam</div>
     <div class="rating">⭐ 4.8 • 33 Reviews</div>
-    <div class="hero-overlay"><div>
-      <h1>மக்கள் மருந்தகம்<br><span>Same Salt. Low Price.</span></h1>
-      <p>Doctor எழுதிய Brand-ஐ கொடுங்கள் — PMBI-யில் அதே மருந்து 30% to 70% குறைவில்!</p>
-    </div></div>
   </div>
 
   <!-- SEARCH -->
@@ -138,7 +127,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef3ff;color:#111;ov
     <form method="get" action="/search/"><input type="text" name="q" placeholder="Ex: Dolo 650, Brilinta 90, Rosevas 5..." autofocus><button>Search →</button></form>
     <div class="chips">
       <a href="/search/?q=Dolo+650">🔥 Dolo 650</a>
-      <a href="/search/?q=Brilinta+90">❤️ Brilinta 90</a>
+      <a href="/search/?q=Brilinta+90">❤ Brilinta 90</a>
       <a href="/search/?q=Rosevas+5">Rosevas 5</a>
       <a href="/search/?q=Telma+40">Telma 40</a>
       <a href="/search/?q=Glycomet+500">Glycomet 500</a>
@@ -157,7 +146,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef3ff;color:#111;ov
   <!-- 3 CARDS -->
   <div class="cards">
     <div class="card"><div class="icon">💰</div><h3>30% to 70% OFF</h3><p>PMBI Generic - Same Salt, Same Effect.<br><b>30% முதல் 70% வரை விலை குறைவு</b></p><div style="margin-top:12px;background:#ff6f00;color:#fff;padding:8px;border-radius:999px;font-weight:800;font-size:13px">SAVE YOUR MONEY 💸</div></div>
-    <div class="card"><div class="icon">🛡️</div><h3>100% Genuine • Govt.</h3><p>Trusted by Pudupakkam customers.<br>Pradhan Mantri Bhartiya Jan Aushadhi Kendra</p><div style="margin-top:12px;background:#00a651;color:#fff;padding:8px;border-radius:999px;font-weight:800;font-size:13px">✅ GOVT. INITIATIVE</div></div>
+    <div class="card"><div class="icon">🛡</div><h3>100% Genuine • Govt.</h3><p>Trusted by Pudupakkam customers.<br>Pradhan Mantri Bhartiya Jan Aushadhi Kendra</p><div style="margin-top:12px;background:#00a651;color:#fff;padding:8px;border-radius:999px;font-weight:800;font-size:13px">✅ GOVT. INITIATIVE</div></div>
     <div class="card"><div class="icon">📞</div><h3>Order in 1 Min</h3><p class="big">63820 53489</p><p>Free Delivery • Open 7 Days<br>8 AM - 10 PM • Pudupakkam</p><div style="margin-top:12px;background:#0f3d8a;color:#fff;padding:8px;border-radius:999px;font-weight:800;font-size:13px">📍 CHENNAI - 603103</div></div>
   </div>
 
@@ -165,7 +154,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#eef3ff;color:#111;ov
   <div class="section-title">🏪 Our Shop <span>Live Photos</span></div>
   <div class="gallery">
     <div class="g-item"><img src="{% static 'pharmacy/shop-board.jpg' %}"><label>📍 Main Board • Pudupakkam</label></div>
-    <div class="g-item"><img src="{% static 'pharmacy/shop-standee.jpg' %}"><label>🏛️ Jan Aushadhi Kendra</label></div>
+    <div class="g-item"><img src="{% static 'pharmacy/shop-standee.jpg' %}"><label>🏛 Jan Aushadhi Kendra</label></div>
     <div class="g-item"><img src="{% static 'pharmacy/shop-shelf.jpg' %}"><label>💊 PMBI Shelf • Drug Codes</label></div>
   </div>
 
